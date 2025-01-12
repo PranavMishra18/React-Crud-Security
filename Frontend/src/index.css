@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+  width: 120px;
+}
+
+.submit-btn {
+  margin: 0 37px;
+  width: 80%;
+  text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button,
+input:-webkit-autofill {
+  -webkit-appearance: none;
+  margin: 0;
+  background-color: transparent !important; /* Reset background */
+  color: inherit !important; /* Match text color */
+  -webkit-text-fill-color: inherit !important; /* Force autofill text color */
+  box-shadow: 0 0 0px 1000px transparent inset !important; /* Neutralize autofill background */
+}
+
+hr {
+  border-top: 1px solid oklch(77.48% 0.204 60.62 / 1);
+}
