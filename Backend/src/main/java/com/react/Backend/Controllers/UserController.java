@@ -1,5 +1,7 @@
 package com.react.Backend.Controllers;
 
+import com.react.Backend.DTO.AdminUserDTO;
+import com.react.Backend.DTO.PublicUserDTO;
 import com.react.Backend.Entities.User;
 import com.react.Backend.Services.UserService;
 import jakarta.validation.Valid;
@@ -21,11 +23,26 @@ public class UserController {
         return "hello";
     }
 
-    @GetMapping("/users")
-    public List<User> getUsers(){
+    @GetMapping("/authenticated")
+    public String test2() {
+        return "I am authenticated";
+    }
 
-        return userService.getUsers();
+    @GetMapping("/public/users")
+    public List<PublicUserDTO> getPublicUsers(){
 
+        return userService.getPublicDTOUsers();
+
+    }
+
+    @GetMapping("/admin/users")
+    public List<AdminUserDTO> getAdminUsers(){
+        return userService.getAdminDTOUsers();
+    }
+
+    @GetMapping("/admin/users/{country}")
+    public List<AdminUserDTO> getAdminUsers(@PathVariable String country){
+        return userService.getAdminDTOUsersByCountry(country);
     }
 
     @GetMapping("/user/{id}")
@@ -35,23 +52,6 @@ public class UserController {
 
     }
 
-    @PostMapping("/user")
-    public User createUser(@Valid @RequestBody User user){
-        return userService.saveUser(user);
-    }
-
-    @PutMapping("/user/{id}")
-    public User updateUser(@PathVariable Long id,@Valid @RequestBody User newUser){
-
-        User oldUser = userService.getUser(id);
-
-        oldUser.setAge(newUser.getAge());
-        oldUser.setUsername(newUser.getUsername());
-        oldUser.setEmail(newUser.getEmail());
-
-        return userService.saveUser(oldUser);
-
-    }
 
     @DeleteMapping("/user/{id}")
     public void deleteUser(@PathVariable Long id){
